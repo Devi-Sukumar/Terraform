@@ -49,29 +49,40 @@
 #         }
 # }
 
-## Fifth instance - Assignment 4
-resource "aws_instance" "assign-4" {
-        ami = "ami-09040d770ffe2224f" 
+# ## Fifth instance - Assignment 4 -- commented to destroy the previous deployment from assignment3
+# resource "aws_instance" "assign-4" {
+#         ami = "ami-09040d770ffe2224f" 
+#         instance_type = "t2.micro"
+#         subnet_id = aws_subnet.assign-4-subnet.id
+#         key_name = "tfkey"          
+#         tags = {
+#         Name = "Tf-assign-4"
+#         }
+# }
+
+# resource "aws_vpc" "assign-4-vpc" {
+#         cidr_block = "10.0.0.0/16"
+#         tags = {
+#         Name = "assignment-4-vpc"
+#         }
+# }
+
+# resource "aws_subnet" "assign-4-subnet" {
+#         vpc_id = aws_vpc.assign-4-vpc.id
+#         cidr_block = "10.0.1.0/24"
+#         availability_zone = "us-east-2a"
+#         tags = {
+#         Name = "assign-4-subnet"
+#         }
+# }
+
+## Sixth instance - Assignment 5
+resource "aws_instance" "assign-5" {
+        ami = "ami-09040d770ffe2224f"
         instance_type = "t2.micro"
-        subnet_id = aws_subnet.assign-4-subnet.id
-        key_name = "tfkey"          
+        key_name = "tfkey"
+        user_data = "${file("install-apache2.sh")}"
         tags = {
-        Name = "Tf-assign-4"
-        }
-}
-
-resource "aws_vpc" "assign-4-vpc" {
-        cidr_block = "10.0.0.0/16"
-        tags = {
-        Name = "assignment-4-vpc"
-        }
-}
-
-resource "aws_subnet" "assign-4-subnet" {
-        vpc_id = aws_vpc.assign-4-vpc.id
-        cidr_block = "10.0.1.0/24"
-        availability_zone = "us-east-2a"
-        tags = {
-        Name = "assign-4-subnet"
+                Name = "Tf-assign-5"
         }
 }
